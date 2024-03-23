@@ -5,13 +5,18 @@ from typing import (
 
 RDF_NAMESPACE = '{http://www.w3.org/1999/02/22-rdf-syntax-ns#}'
 CRS_NAMESPACE = '{http://ns.adobe.com/camera-raw-settings/1.0/}'
+XMP_EXAMPLES = [
+    'assets/lightroom-presets/example-preset1.xmp',
+    'assets/lightroom-presets/example-preset2.xmp',
+    'assets/lightroom-presets/example-preset3.xmp',
+    'assets/lightroom-presets/example-preset4.xmp'
+]
+
 
 def read_xmp(path: str) -> ET:
     tree = ET.parse(path)
     root = tree.getroot()
     return root
-
-root = read_xmp('assets/lightroom-presets/example-preset1.xmp')
 
 def get_description(tree: ET) -> List[Dict[str, Any]]:
     descriptions = list()
@@ -27,5 +32,3 @@ def get_description(tree: ET) -> List[Dict[str, Any]]:
     return descriptions
 
 
-d = get_description(root)
-print(d)
