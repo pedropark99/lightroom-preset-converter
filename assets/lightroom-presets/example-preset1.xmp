@@ -1,0 +1,182 @@
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 7.0-c000 1.000000, 0000/00/00-00:00:00        ">
+ <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <rdf:Description rdf:about=""
+    xmlns:crs="http://ns.adobe.com/camera-raw-settings/1.0/"
+   crs:PresetType="Normal"
+   crs:Cluster=""
+   crs:UUID="236ADBA586A146BEA33D6CAA095B0A92"
+   crs:SupportsAmount2="True"
+   crs:SupportsAmount="True"
+   crs:SupportsColor="True"
+   crs:SupportsMonochrome="True"
+   crs:SupportsHighDynamicRange="True"
+   crs:SupportsNormalDynamicRange="True"
+   crs:SupportsSceneReferred="True"
+   crs:SupportsOutputReferred="True"
+   crs:RequiresRGBTables="False"
+   crs:CameraModelRestriction=""
+   crs:Copyright=""
+   crs:ContactInfo=""
+   crs:Version="14.5"
+   crs:ProcessVersion="11.0"
+   crs:Contrast2012="0"
+   crs:Highlights2012="-10"
+   crs:Shadows2012="+20"
+   crs:Whites2012="-10"
+   crs:Blacks2012="+25"
+   crs:Texture="0"
+   crs:Clarity2012="0"
+   crs:Dehaze="0"
+   crs:Vibrance="0"
+   crs:Saturation="-5"
+   crs:ParametricShadows="-41"
+   crs:ParametricDarks="-26"
+   crs:ParametricLights="+15"
+   crs:ParametricHighlights="0"
+   crs:ParametricShadowSplit="24"
+   crs:ParametricMidtoneSplit="45"
+   crs:ParametricHighlightSplit="77"
+   crs:Sharpness="25"
+   crs:SharpenRadius="+1.0"
+   crs:SharpenDetail="25"
+   crs:SharpenEdgeMasking="0"
+   crs:LuminanceSmoothing="0"
+   crs:ColorNoiseReduction="25"
+   crs:ColorNoiseReductionDetail="50"
+   crs:ColorNoiseReductionSmoothness="50"
+   crs:HueAdjustmentRed="+22"
+   crs:HueAdjustmentOrange="+2"
+   crs:HueAdjustmentYellow="+18"
+   crs:HueAdjustmentGreen="+22"
+   crs:HueAdjustmentAqua="0"
+   crs:HueAdjustmentBlue="+5"
+   crs:HueAdjustmentPurple="+10"
+   crs:HueAdjustmentMagenta="+27"
+   crs:SaturationAdjustmentRed="-13"
+   crs:SaturationAdjustmentOrange="-9"
+   crs:SaturationAdjustmentYellow="-8"
+   crs:SaturationAdjustmentGreen="-44"
+   crs:SaturationAdjustmentAqua="-38"
+   crs:SaturationAdjustmentBlue="-12"
+   crs:SaturationAdjustmentPurple="-36"
+   crs:SaturationAdjustmentMagenta="-28"
+   crs:LuminanceAdjustmentRed="-14"
+   crs:LuminanceAdjustmentOrange="0"
+   crs:LuminanceAdjustmentYellow="+13"
+   crs:LuminanceAdjustmentGreen="0"
+   crs:LuminanceAdjustmentAqua="+32"
+   crs:LuminanceAdjustmentBlue="-18"
+   crs:LuminanceAdjustmentPurple="0"
+   crs:LuminanceAdjustmentMagenta="+12"
+   crs:SplitToningShadowHue="0"
+   crs:SplitToningShadowSaturation="0"
+   crs:SplitToningHighlightHue="0"
+   crs:SplitToningHighlightSaturation="0"
+   crs:SplitToningBalance="0"
+   crs:ColorGradeMidtoneHue="0"
+   crs:ColorGradeMidtoneSat="0"
+   crs:ColorGradeShadowLum="0"
+   crs:ColorGradeMidtoneLum="0"
+   crs:ColorGradeHighlightLum="0"
+   crs:ColorGradeBlending="50"
+   crs:ColorGradeGlobalHue="0"
+   crs:ColorGradeGlobalSat="0"
+   crs:ColorGradeGlobalLum="0"
+   crs:GrainAmount="45"
+   crs:GrainSize="20"
+   crs:GrainFrequency="35"
+   crs:PostCropVignetteAmount="0"
+   crs:ShadowTint="0"
+   crs:RedHue="0"
+   crs:RedSaturation="0"
+   crs:GreenHue="0"
+   crs:GreenSaturation="0"
+   crs:BlueHue="0"
+   crs:BlueSaturation="0"
+   crs:OverrideLookVignette="False"
+   crs:ToneCurveName2012="Custom"
+   crs:HasSettings="True">
+   <crs:Name>
+    <rdf:Alt>
+     <rdf:li xml:lang="x-default">Presetpro - Vintage Vibe</rdf:li>
+    </rdf:Alt>
+   </crs:Name>
+   <crs:ShortName>
+    <rdf:Alt>
+     <rdf:li xml:lang="x-default"/>
+    </rdf:Alt>
+   </crs:ShortName>
+   <crs:SortName>
+    <rdf:Alt>
+     <rdf:li xml:lang="x-default"/>
+    </rdf:Alt>
+   </crs:SortName>
+   <crs:Group>
+    <rdf:Alt>
+     <rdf:li xml:lang="x-default">Presetpro - Vintage Vibe</rdf:li>
+    </rdf:Alt>
+   </crs:Group>
+   <crs:Description>
+    <rdf:Alt>
+     <rdf:li xml:lang="x-default"/>
+    </rdf:Alt>
+   </crs:Description>
+   <crs:ToneCurvePV2012>
+    <rdf:Seq>
+     <rdf:li>3, 19</rdf:li>
+     <rdf:li>34, 58</rdf:li>
+     <rdf:li>115, 126</rdf:li>
+     <rdf:li>255, 255</rdf:li>
+    </rdf:Seq>
+   </crs:ToneCurvePV2012>
+   <crs:ToneCurvePV2012Red>
+    <rdf:Seq>
+     <rdf:li>0, 0</rdf:li>
+     <rdf:li>23, 15</rdf:li>
+     <rdf:li>74, 57</rdf:li>
+     <rdf:li>121, 124</rdf:li>
+     <rdf:li>182, 190</rdf:li>
+     <rdf:li>255, 253</rdf:li>
+    </rdf:Seq>
+   </crs:ToneCurvePV2012Red>
+   <crs:ToneCurvePV2012Green>
+    <rdf:Seq>
+     <rdf:li>0, 2</rdf:li>
+     <rdf:li>26, 18</rdf:li>
+     <rdf:li>120, 121</rdf:li>
+     <rdf:li>181, 189</rdf:li>
+     <rdf:li>255, 253</rdf:li>
+    </rdf:Seq>
+   </crs:ToneCurvePV2012Green>
+   <crs:ToneCurvePV2012Blue>
+    <rdf:Seq>
+     <rdf:li>0, 4</rdf:li>
+     <rdf:li>68, 53</rdf:li>
+     <rdf:li>120, 121</rdf:li>
+     <rdf:li>176, 185</rdf:li>
+     <rdf:li>222, 231</rdf:li>
+     <rdf:li>255, 253</rdf:li>
+    </rdf:Seq>
+   </crs:ToneCurvePV2012Blue>
+   <crs:Look>
+    <rdf:Description
+     crs:Name="Presetpro - Vintage Vibe"
+     crs:Amount="0"
+     crs:Cluster="Freepresets.com"
+     crs:UUID="854E6562AEF44D4F9EF23CDAB285E84C"
+     crs:Stubbed="true">
+    <crs:SortName>
+     <rdf:Alt>
+      <rdf:li xml:lang="x-default">1</rdf:li>
+     </rdf:Alt>
+    </crs:SortName>
+    <crs:Group>
+     <rdf:Alt>
+      <rdf:li xml:lang="x-default">Presetpro - Vintage Vibe</rdf:li>
+     </rdf:Alt>
+    </crs:Group>
+    </rdf:Description>
+   </crs:Look>
+  </rdf:Description>
+ </rdf:RDF>
+</x:xmpmeta>
