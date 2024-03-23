@@ -7,6 +7,8 @@ LR_TO_RT_MAPPING = {
     "Shadows": {'section': 'ToneEqualizer', 'key': "Band1"},
     "Whites": {'section': 'ToneEqualizer', 'key': "Band4"},
     "Blacks": {'section': 'ToneEqualizer', 'key': "Band0"},
+    "Temperature": {'section': 'White Balance', 'key': 'Temperature'},
+    'Tint': {'section': 'White Balance', 'key': 'Green'},
     "Texture": {},
     "Clarity": {},
     "Dehaze": {'section': 'Dehaze', 'key': 'Strength'},
@@ -53,34 +55,15 @@ LR_TO_RT_MAPPING = {
     "LuminanceAdjustmentBlue": {'section': 'HSV Equalizer', 'key': 'HCurve'},
     "LuminanceAdjustmentPurple": {'section': 'HSV Equalizer', 'key': 'HCurve'},
     "LuminanceAdjustmentMagenta": {'section': 'HSV Equalizer', 'key': 'HCurve'},
+    "GrainAmount": {},
+    "GrainSize": {},
+    "GrainFrequency": {},
     # Method=LabRegions
     "SplitToningShadowHue": {'section': 'ColorToning', 'key': 'LabRegionA_1'},
     "SplitToningShadowSaturation": {},
     "SplitToningHighlightHue": {'section': 'ColorToning', 'key': 'LabRegionA_1'},
     "SplitToningHighlightSaturation": {},
-    "ColorGradeMidtoneHue": {'section': 'ColorToning', 'key': 'LabRegionA_1'},
-    "ColorGradeMidtoneSat": {},
-    "ColorGradeShadowLum": {},
-    "ColorGradeMidtoneLum": {},
-    "ColorGradeHighlightLum": {},
-    "ColorGradeBlending": {},
-    "ColorGradeGlobalHue": {},
-    "ColorGradeGlobalSat":{},
-    "ColorGradeGlobalLum" :{} ,
-    "GrainAmount": {},
-    "GrainSize": {},
-    "GrainFrequency": {},
-    "PostCropVignetteAmount" :{},
-    "ShadowTint" :{},
-    "RedHue" :{},
-    "RedSaturation": {},
-    "GreenHue": {},
-    "GreenSaturation" :{},
-    "BlueHue" : {},
-    "BlueSaturation": {},
-    "OverrideLookVignette": {},
-    "ToneCurveName": {},
-    "HasSettings": {}
+    "ColorGradeMidtoneHue": {'section': 'ColorToning', 'key': 'LabRegionA_1'}
 }
 
 def empty_dict(d: dict) -> bool:
@@ -92,6 +75,17 @@ NOT_SUPPORTED_FEATURES = list()
 for key, value in LR_TO_RT_MAPPING.items():
     if empty_dict(value):
         NOT_SUPPORTED_FEATURES.append(key)
+
+
+
+
+
+
+
+
+
+
+
 
 
 

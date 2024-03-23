@@ -1,4 +1,3 @@
-from read_xmp import read_xmp, XMP_EXAMPLES, get_description
 from typing import Union, Any, Tuple
 
 def parse_int(input: Union[str, int]) -> int:
@@ -23,6 +22,3 @@ class LightRoomValue:
         scale = scale
 
 
-xmp = read_xmp(XMP_EXAMPLES[3])
-data = get_description(xmp)
-print(data)
