@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0", "toml"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lightroom-preset-converter"
+version = "0.1"
+authors = [
+  { name="Pedro Faria", email="pedropark99@gmail.com" }
+]
+description = "A Python converter for Lightroom Preset files"
+readme = "README.md"
+requires-python = ">=3.7"
+license = { file = "LICENSE.txt" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "setuptools",
+    "toml"
+]
+
+[project.urls]
+Homepage = "https://github.com/pedropark99/lightroom-preset-converter"
+Repo = "https://github.com/pedropark99/lightroom-preset-converter"
+Issues = "https://github.com/pedropark99/lightroom-preset-converter/issues"
+
