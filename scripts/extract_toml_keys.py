@@ -2,7 +2,7 @@ import re
 
 TOML_KEY_REGEX = r'^(?P<key>[A-Za-z0-9]+)( )?='
 TOML_SECTION_REGEX = r'^\[(?P<key>[A-Za-z0-9& ]+)\]'
-PP3_PATH = 'assets/rawtherapee-presets/IMG_7922.jpg.out.pp3'
+PP3_PATH = 'assets/rawtherapee-presets/IMG_7761.JPG.out.pp3'
 
 with open(PP3_PATH, 'r', encoding='utf-8') as f:
     toml_text = f.read()

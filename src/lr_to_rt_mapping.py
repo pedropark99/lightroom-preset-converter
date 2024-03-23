@@ -676,6 +676,17 @@ RT_PP3_TOML_SECTIONS = {
         "LabGridAHigh",
         "LabGridBHigh",
         "LabRegionsShowMask",
+        "LabRegionA_1",
+        "LabRegionB_1",
+        "LabRegionSaturation_1",
+        "LabRegionSlope_1",
+        "LabRegionOffset_1",
+        "LabRegionPower_1",
+        "LabRegionHueMask_1",
+        "LabRegionChromaticityMask_1",
+        "LabRegionLightnessMask_1",
+        "LabRegionMaskBlur_1",
+        "LabRegionChannel_1"
     ],
     "RAW": [
         "DarkFrame",
