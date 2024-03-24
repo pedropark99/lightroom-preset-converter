@@ -2,11 +2,7 @@
 from typing import Tuple
 
 def parameter_scale(parameter_name: str) -> Tuple[int, int]:
-    try:
-        scale = LR_PARAMETERS_SCALE[parameter_name]
-    except KeyError:
-        scale = (-100,100)
-    return scale
+    return LR_PARAMETERS_SCALE[parameter_name]
 
 LR_PARAMETERS_SCALE = {
     'Exposure': (-5, 5),

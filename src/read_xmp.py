@@ -2,11 +2,14 @@ import re
 import warnings
 import xml.etree.ElementTree as ET
 from typing import (
-    List,Dict,Any
+    List,
+    Dict,
+    Any,
+    Tuple,
+    Union
 )
 
 
-from parse_values import parse_float, parse_int, LightRoomValue
 from lr_mapping import parameter_scale
 from lr_to_rt_mapping import NOT_SUPPORTED_FEATURES, LR_TO_RT_MAPPING
 
@@ -64,12 +67,44 @@ def parse_xmp(path: str):
             else:
                 parsed_value = value
             
-            scale = parameter_scale(key)
-            parsed_template[key] = LightRoomValue(parsed_value, scale)
+            try:
+                scale = parameter_scale(key)
+            except KeyError:
+                continue
+
+            parsed_template[key] = LightRoomValue(key, parsed_value, scale)
 
     return parsed_template
     
 
 
-a = parse_xmp(XMP_EXAMPLES[3])
-print(a)
+
+
+
+
+
+def parse_int(input: Union[str, int]) -> int:
+    if isinstance(input, int):
+        return input
+    
+    input = input.replace('+', '')
+    return int(input)
+
+def parse_float(input: Union[str, float]):
+    if isinstance(input, float):
+        return input
+    
+    input = input.replace('+', '')
+    return float(input)
+
+
+class LightRoomValue:
+    '''Class to represent a value created by Lightroom'''
+    def __init__(self, name: str, value: Any, scale: Tuple[float, float]) -> None:
+        name = name
+        value = value
+        scale = scale
+
+    def as_rt_value():
+        pass
+
