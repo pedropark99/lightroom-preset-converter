@@ -75,6 +75,10 @@ def rt_parse_white_balance_values(parameters: LRToRTParameters):
     set this slider in RawTherapee to 0.950, which is 0.05 points less
     than the default value for this slider.
     '''
+    if 'White Balance:Enabled' not in parameters.rt.keys():
+        parameters.rt['White Balance:Enabled'] = 'true'
+        parameters.rt['White Balance:Setting'] = 'Custom'
+
     if 'Temperature' in parameters.lr.keys():
         lr_temp_value = parameters.lr['Temperature']
         rt_map = lr_temp_value.corresponding_rt_parameter()
@@ -194,14 +198,21 @@ def rt_convert_hsv_curve(parameters: LRToRTParameters):
             curve_type = _hsv_curve_type(key)
             color_name = _hsv_color_name(key)
             adjustment_key = curve_type + color_name + 'Adjustment'
-            curve_defaults[adjustment_key] = RawTherapeeValue(hsv_toml, value = 0.5, scale = (0, 1))
-            curve_defaults[adjustment_key].from_percentage(lr_value_as_percentage)
+            if curve_type == 'Hue':
+                scale = (-0.05, 0.05)
+                rt_scaled_value = scaled_value(lr_value_as_percentage, scale)
+                rt_scaled_value = 0.5 + rt_scaled_value
+            else:
+                scale = (0, 1)
+                rt_scaled_value = scaled_value(lr_value_as_percentage, scale)
+
+            curve_defaults[adjustment_key] = RawTherapeeValue(hsv_toml, value = rt_scaled_value, scale = scale)
         else:
             # Add the default value
             curve_type = _hsv_curve_type(key)
             color_name = _hsv_color_name(key)
             adjustment_key = curve_type + color_name + 'Adjustment'
-            curve_defaults[adjustment_key] = RawTherapeeValue(hsv_toml, value = 0.5, scale = (0, 1))
+            curve_defaults[adjustment_key] = RawTherapeeValue(hsv_toml, value = 0.5, scale = (0, 0.15))
 
 
     curve = _compile_hsv_curve(curve_defaults)
@@ -296,6 +307,6 @@ def write_pp3_string(rt_preset_data: Dict[str, Union[str, RawTherapeeValue]]):
     return toml_string
 
 
-a = convert_to_rt(XMP_EXAMPLES[4])
+a = convert_to_rt(XMP_EXAMPLES[0])
 b = write_pp3_string(a)
 print(b)
