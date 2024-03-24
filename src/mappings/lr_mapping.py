@@ -1,7 +1,7 @@
 '''Lookup tables with informations about Lightroom parameters'''
 from typing import Tuple
 
-def parameter_scale(parameter_name: str) -> Tuple[int, int]:
+def lr_parameter_scale(parameter_name: str) -> Tuple[int, int]:
     return LR_PARAMETERS_SCALE[parameter_name]
 
 LR_PARAMETERS_SCALE = {

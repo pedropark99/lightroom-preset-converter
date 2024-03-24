@@ -10,8 +10,8 @@ from typing import (
 )
 
 
-from lr_mapping import parameter_scale
-from lr_to_rt_mapping import NOT_SUPPORTED_FEATURES, LR_TO_RT_MAPPING
+from mappings.lr_mapping import lr_parameter_scale
+from mappings.lr_to_rt_mapping import NOT_SUPPORTED_FEATURES, LR_TO_RT_MAPPING
 
 RDF_NAMESPACE = '{http://www.w3.org/1999/02/22-rdf-syntax-ns#}'
 CRS_NAMESPACE = '{http://ns.adobe.com/camera-raw-settings/1.0/}'
@@ -68,7 +68,7 @@ def parse_xmp(path: str):
                 parsed_value = value
             
             try:
-                scale = parameter_scale(key)
+                scale = lr_parameter_scale(key)
             except KeyError:
                 continue
 
