@@ -20,7 +20,8 @@ XMP_EXAMPLES = [
     'assets/lightroom-presets/example-preset1.xmp',
     'assets/lightroom-presets/example-preset2.xmp',
     'assets/lightroom-presets/example-preset3.xmp',
-    'assets/lightroom-presets/example-preset4.xmp'
+    'assets/lightroom-presets/example-preset4.xmp',
+    'assets/lightroom-presets/only-temperature.xmp'
 ]
 
 

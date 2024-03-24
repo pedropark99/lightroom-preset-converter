@@ -3,8 +3,8 @@ import re
 import toml
 
 from read_xmp import parse_xmp, XMP_EXAMPLES
-from mappings.rt_mapping import RawTherapeeValue
-from utils.scale import value_as_percentage
+from mappings.rt_mapping import RawTherapeeValue, RT_PARAMETERS_SCALE
+from utils.scale import value_as_percentage, scaled_value
 from mappings.lr_to_rt_mapping import LR_TO_RT_PARAMETERS_FOR_DIRECT_CONVERSION
 from mappings.lr_mapping import (
     LightRoomValue,
@@ -22,14 +22,17 @@ class LRToRTParameters:
 
 
 
-def convert_to_rt(path: str):
+def convert_to_rt(path: str, print_result: bool = False):
     xmp = parse_xmp(path)
     lr_to_rt = LRToRTParameters(xmp)
     lr_to_rt = rt_convert_direct_parameters(lr_to_rt)
     lr_to_rt = rt_enable_used_sections(lr_to_rt)
+    lr_to_rt = rt_parse_white_balance_values(lr_to_rt)
     lr_to_rt = rt_convert_parametric_curve(lr_to_rt)
     lr_to_rt = rt_convert_hsv_curve(lr_to_rt)
-    
+    if print_result:
+        print(lr_to_rt.rt)
+
     return lr_to_rt.rt
 
 
@@ -47,6 +50,61 @@ def rt_enable_used_sections(parameters: LRToRTParameters):
             parameters.rt['White Balance:Setting'] = 'Custom'
 
     return parameters
+
+
+
+def rt_parse_white_balance_values(parameters: LRToRTParameters):
+    '''Parse LightRoom White Balance values into their equivalents in RawTherapee.
+    
+    The White Balance controls from RawTherapee (RT) are slightly different than in LightRoom (LR).
+    Specially in the color tint slider. In RT, the color tint slider goes from Magenta to Green.
+    While in LR, the slider goes from Green to Magenta.
+
+    Also, in LR, the slider is balanced, meaning that the middle between
+    Green and Magenta is precisely at the middle of the scale (at 0).
+    While in RT, the middle between Green and Magenta is at 1, and also,
+    the scale is a lot bigger on the "green side", than it is on the
+    "magenta side", making it a very unbalanced scale.
+
+    Also, in RT, we have the Blue/Red slider control in
+    the White Balance section. But LR does not have such
+    control. As a result, looks like the photos in RT
+    are always a little bit more red than in LR.
+
+    As a result, for a more precise conversion, by default, we
+    set this slider in RawTherapee to 0.950, which is 0.05 points less
+    than the default value for this slider.
+    '''
+    if 'Temperature' in parameters.lr.keys():
+        lr_temp_value = parameters.lr['Temperature']
+        rt_map = lr_temp_value.corresponding_rt_parameter()
+        rt_scale = RT_PARAMETERS_SCALE['White Balance:Temperature']
+        parameters.rt['White Balance:Temperature'] = RawTherapeeValue(
+            rt_map,
+            lr_temp_value.value,
+            rt_scale
+        )
+
+    if 'Tint' in parameters.lr.keys():
+        lr_value = parameters.lr['Tint'].value
+        if lr_value < 0:
+            # More to the Green side
+            scale = (1, 12)
+            lr_value = abs(lr_value)
+            rt_value = scaled_value(lr_value / 100, scale)
+        else:
+            # More to the Magenta side
+            scale = (0, 1)
+            lr_value = abs(lr_value)
+            rt_value = scaled_value(lr_value / 100, scale)
+            rt_value = 1 - rt_value
+        
+        parameters.rt['White Balance:Green'] = rt_value
+
+    parameters.rt['White Balance:Equal'] = 0.950
+    return parameters
+
+
 
 
 
@@ -238,6 +296,6 @@ def write_pp3_string(rt_preset_data: Dict[str, Union[str, RawTherapeeValue]]):
     return toml_string
 
 
-a = convert_to_rt(XMP_EXAMPLES[3])
+a = convert_to_rt(XMP_EXAMPLES[4])
 b = write_pp3_string(a)
 print(b)

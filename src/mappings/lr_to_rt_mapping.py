@@ -82,8 +82,6 @@ LR_TO_RT_PARAMETERS_FOR_DIRECT_CONVERSION = [
     "Shadows",
     "Whites",
     "Blacks",
-    "Temperature",
-    'Tint',
     "Dehaze",
     "Vibrance",
     "Saturation",
