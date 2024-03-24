@@ -1,5 +1,30 @@
 '''Lookup tables with informations about Lightroom parameters'''
-from typing import Tuple
+from typing import Tuple, Any, Dict
+from .lr_to_rt_mapping import LR_TO_RT_MAPPING
+from .rt_mapping import rt_parameter_scale
+from utils.scale import value_as_percentage, scaled_value
+
+
+class LightRoomValue:
+    '''Class to represent a value created by Lightroom'''
+    def __init__(self, name: str, value: Any, scale: Tuple[float, float]) -> None:
+        self.name = name
+        self.value = value
+        self.scale = scale
+
+    def corresponding_rt_parameter(self) -> Dict[Any, Any]:
+        try:
+            return LR_TO_RT_MAPPING[self.name]
+        except:
+            return None
+
+    def as_rt_value(self):
+        rt_map = self.corresponding_rt_parameter()
+        rt_scale = rt_parameter_scale(rt_map['key'], rt_map['section'])
+        lr_scaled_value = value_as_percentage(self.value, self.scale)
+        rt_scaled_value = scaled_value(lr_scaled_value, rt_scale)
+        return rt_scaled_value
+
 
 def lr_parameter_scale(parameter_name: str) -> Tuple[int, int]:
     return LR_PARAMETERS_SCALE[parameter_name]
@@ -54,3 +79,16 @@ LR_PARAMETERS_SCALE = {
     "LuminanceAdjustmentPurple": (-100, 100),
     "LuminanceAdjustmentMagenta": (-100, 100)
 }
+
+
+
+
+LR_PARAMETRIC_CURVE_PARAMETERS = [
+    "ParametricShadows",
+    "ParametricDarks",
+    "ParametricLights",
+    "ParametricHighlights",
+    "ParametricShadowSplit",
+    "ParametricMidtoneSplit",
+    "ParametricHighlightSplit"
+]

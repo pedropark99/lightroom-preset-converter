@@ -10,8 +10,9 @@ from typing import (
 )
 
 
-from mappings.lr_mapping import lr_parameter_scale
+from mappings.lr_mapping import lr_parameter_scale, LightRoomValue
 from mappings.lr_to_rt_mapping import NOT_SUPPORTED_FEATURES, LR_TO_RT_MAPPING
+from utils.parsing import parse_float
 
 RDF_NAMESPACE = '{http://www.w3.org/1999/02/22-rdf-syntax-ns#}'
 CRS_NAMESPACE = '{http://ns.adobe.com/camera-raw-settings/1.0/}'
@@ -44,7 +45,7 @@ def get_description(tree: ET) -> List[Dict[str, Any]]:
 def _report_non_supported_feature(key: str, value: str):
     message = f'[WARNING]: The current version of the converter does not support the feature {key}.'
     message = message + f' As consequence, we are ignoring the attribute "{key}={value}" in the original template .xmp file'
-    warnings.warn(message)
+    print(message)
 
 
 
@@ -54,15 +55,14 @@ def parse_xmp(path: str):
     parsed_template = dict()
     for description in template_descriptions:
         for key, value in description.items():
+            key = key.replace('2012', '')
             if key in NOT_SUPPORTED_FEATURES:
                 _report_non_supported_feature(key, value)
                 continue
             if key not in LR_TO_RT_MAPPING.keys():
                 continue
 
-            if re.search(r'^[0-9+-]+$', value):
-                parsed_value = parse_int(value)
-            elif re.search(r'^[0-9+-.]+$', value):
+            if re.search(r'^[0-9+-.]+$', value):
                 parsed_value = parse_float(value)
             else:
                 parsed_value = value
@@ -70,6 +70,7 @@ def parse_xmp(path: str):
             try:
                 scale = lr_parameter_scale(key)
             except KeyError:
+                print(f"[WARNING]: Could not find the LightRoom scale for parameter {key}. Ignoring this parameter...")
                 continue
 
             parsed_template[key] = LightRoomValue(key, parsed_value, scale)
@@ -77,34 +78,4 @@ def parse_xmp(path: str):
     return parsed_template
     
 
-
-
-
-
-
-
-def parse_int(input: Union[str, int]) -> int:
-    if isinstance(input, int):
-        return input
-    
-    input = input.replace('+', '')
-    return int(input)
-
-def parse_float(input: Union[str, float]):
-    if isinstance(input, float):
-        return input
-    
-    input = input.replace('+', '')
-    return float(input)
-
-
-class LightRoomValue:
-    '''Class to represent a value created by Lightroom'''
-    def __init__(self, name: str, value: Any, scale: Tuple[float, float]) -> None:
-        name = name
-        value = value
-        scale = scale
-
-    def as_rt_value():
-        pass
 

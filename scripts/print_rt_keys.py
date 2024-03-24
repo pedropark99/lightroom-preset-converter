@@ -71,4 +71,5 @@ for value in LR_TO_RT_MAPPING.values():
     if len(value.keys()) == 0:
         continue
     k = value['key']
-    print(f"'{k}': (),")
+    s = value['section']
+    print(f"'{s}:{k}': (),")

@@ -57,13 +57,7 @@ LR_TO_RT_MAPPING = {
     "LuminanceAdjustmentMagenta": {'section': 'HSV Equalizer', 'key': 'HCurve'},
     "GrainAmount": {},
     "GrainSize": {},
-    "GrainFrequency": {},
-    # Method=LabRegions
-    "SplitToningShadowHue": {'section': 'ColorToning', 'key': 'LabRegionA_1'},
-    "SplitToningShadowSaturation": {},
-    "SplitToningHighlightHue": {'section': 'ColorToning', 'key': 'LabRegionA_1'},
-    "SplitToningHighlightSaturation": {},
-    "ColorGradeMidtoneHue": {'section': 'ColorToning', 'key': 'LabRegionA_1'}
+    "GrainFrequency": {}
 }
 
 def empty_dict(d: dict) -> bool:
@@ -77,3 +71,24 @@ for key, value in LR_TO_RT_MAPPING.items():
         NOT_SUPPORTED_FEATURES.append(key)
 
 
+
+# This is a list of LR parameters that can be
+# directly translated into RT parameters by
+# simply scaling their values
+LR_TO_RT_PARAMETERS_FOR_DIRECT_CONVERSION = [
+    "Exposure",
+    "Contrast",
+    "Highlights",
+    "Shadows",
+    "Whites",
+    "Blacks",
+    "Temperature",
+    'Tint',
+    "Dehaze",
+    "Vibrance",
+    "Saturation",
+    "Sharpness",
+    "SharpenRadius",
+    "LuminanceSmoothing",
+    "LuminanceNoiseReductionDetail"
+]

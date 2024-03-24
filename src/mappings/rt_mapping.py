@@ -1,39 +1,49 @@
 '''Lookup tables with informations about RawTherapee parameters'''
+from typing import Tuple, Optional, Any
 
 
+class RawTherapeeValue:
+    '''Class to represent a value in RawTherapee'''
+    def __init__(self, name: str, value: Any, scale: Tuple[float, float]) -> None:
+        self.name = name
+        self.value = value
+        self.scale = scale
+
+
+def rt_parameter_scale(name: str, section: Optional[str]) -> Tuple[float, float]:
+    if section is not None:
+        key = f"{section}:{name}"
+        try:
+            scale = RT_PARAMETERS_SCALE[key]
+            return scale
+        except:
+            raise KeyError(f"[ERROR]: Could not find the scale for parameter: {key}")
+    
+    for key, value in RT_PARAMETERS_SCALE.items():
+        if key.split(':')[1] == name:
+            return value
+
+
+# Key in the form of '<TOML section>:<Parameter name>' 
 RT_PARAMETERS_SCALE = {
-    'Compensation': (-5, 12),
-    'Contrast': (-100, 100),
-    'Band3': (-100, 100),
-    'Band1': (-100, 100),
-    'Band4': (-100, 100),
-    'Band0': (-100, 100),
-    'Temperature': (1500, 60000),
-    'Green': (0.02, 10),
+    'Exposure:Compensation':  (-5, 12),
+    'Exposure:Contrast': (-100, 100),
+    'ToneEqualizer:Band3': (-100, 100),
+    'ToneEqualizer:Band1': (-100, 100),
+    'ToneEqualizer:Band4': (-100, 100),
+    'ToneEqualizer:Band0': (-100, 100),
+    'White Balance:Temperature': (1500, 60000),
+    'White Balance:Green': (0.02, 10),
     'Dehaze:Strength': (0, 100),
-    'Pastels': (),
-    'LabRegionSaturation_1': (),
-    'Curve': (),
-    'Curve': (),
-    'Curve': (),
-    'Curve': (),
-    'Curve': (),
-    'Curve': (),
-    'Curve': (),
-    'Amount': (),
-    'Radius': (),
-    'Luma': (),
-    'Ldetail': (),
-    'HCurve': (),
-    'LabRegionA_1': ()
+    'Vibrance:Pastels': (-100, 100),
+    'ColorToning:LabRegionSaturation_1': (-100, 100),
+    'Exposure:Curve': (0,1),
+    'Sharpening:Amount': (1, 1000),
+    'Sharpening:Radius': (0.3, 3),
+    'Directional Pyramid Denoising:Luma': (0, 100),
+    'Directional Pyramid Denoising:Ldetail': (0, 100),
+    'HSV Equalizer:HCurve': (0,1)
 }
-
-
-
-
-
-
-
 
 
 
