@@ -1,8 +1,9 @@
 '''Lookup tables with informations about Lightroom parameters'''
 from typing import Tuple, Any, Dict
 from .lr_to_rt_mapping import LR_TO_RT_MAPPING
-from .rt_mapping import rt_parameter_scale, RawTherapeeValue
+from .rt_mapping import rt_parameter_scale, RawTherapeeValue, RT_PARAMETERS_DATA_TYPE
 from utils.scale import value_as_percentage, scaled_value
+from utils.parsing import parse_float, parse_int
 
 
 class LightRoomValue:
@@ -23,6 +24,13 @@ class LightRoomValue:
         rt_scale = rt_parameter_scale(rt_map['key'], rt_map['section'])
         lr_scaled_value = value_as_percentage(self.value, self.scale)
         rt_scaled_value = scaled_value(lr_scaled_value, rt_scale)
+        rt_key = f"{rt_map['section']}:{rt_map['key']}"
+        rt_data_type = RT_PARAMETERS_DATA_TYPE.get(rt_key)
+        if rt_data_type == 'int':
+            rt_scaled_value = int(rt_scaled_value)
+        if rt_data_type == 'float':
+            rt_scaled_value = float(rt_scaled_value)
+
         return RawTherapeeValue(rt_map, rt_scaled_value, rt_scale)
 
 

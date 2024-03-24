@@ -56,7 +56,25 @@ RT_PARAMETERS_SCALE = {
     'HSV Equalizer:HCurve': (0,1)
 }
 
-
+RT_PARAMETERS_DATA_TYPE = {
+    'Exposure:Compensation':  'float',
+    'Exposure:Contrast': 'int',
+    'ToneEqualizer:Band3': 'int',
+    'ToneEqualizer:Band1': 'int',
+    'ToneEqualizer:Band4': 'int',
+    'ToneEqualizer:Band0': 'int',
+    'White Balance:Temperature': 'int',
+    'White Balance:Green': 'float',
+    'Dehaze:Strength': 'int',
+    'Vibrance:Pastels': 'int',
+    'ColorToning:LabRegionSaturation_1': 'int',
+    'Exposure:Curve': 'float',
+    'Sharpening:Amount': 'int',
+    'Sharpening:Radius': 'float',
+    'Directional Pyramid Denoising:Luma': 'int',
+    'Directional Pyramid Denoising:Ldetail': 'int',
+    'HSV Equalizer:HCurve': 'float'
+}
 
 
 

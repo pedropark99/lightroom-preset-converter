@@ -25,19 +25,27 @@ class LRToRTParameters:
 def convert_to_rt(path: str):
     xmp = parse_xmp(path)
     lr_to_rt = LRToRTParameters(xmp)
-    lr_to_rt = _add_rt_version_info(lr_to_rt)
     lr_to_rt = rt_convert_direct_parameters(lr_to_rt)
+    lr_to_rt = rt_enable_used_sections(lr_to_rt)
     lr_to_rt = rt_convert_parametric_curve(lr_to_rt)
     lr_to_rt = rt_convert_hsv_curve(lr_to_rt)
     
     return lr_to_rt.rt
 
 
-def _add_rt_version_info(parameters: LRToRTParameters):
-    parameters.rt['Version:AppVersion'] = '5.10'
-    parameters.rt['Version:Version'] = '350'
-    parameters.rt['General:ColorLabel'] = '0'
-    parameters.rt['General:InTrash'] = 'false'
+
+def rt_enable_used_sections(parameters: LRToRTParameters):
+    for lr_key, lr_value in parameters.lr.items():
+        rt_parameter = lr_value.corresponding_rt_parameter()
+        rt_section = rt_parameter['section']
+        rt_enabled_key = rt_section + ':Enabled'
+        if rt_enabled_key not in parameters.rt.keys():
+            parameters.rt[rt_section + ':Enabled'] = 'true'
+
+    if 'White Balance:Enabled' in parameters.rt.keys():
+        if 'White Balance:Setting' not in parameters.rt.keys():
+            parameters.rt['White Balance:Setting'] = 'Custom'
+
     return parameters
 
 
