@@ -1,7 +1,7 @@
 '''Lookup tables with informations about Lightroom parameters'''
 from typing import Tuple, Any, Dict
 from .lr_to_rt_mapping import LR_TO_RT_MAPPING
-from .rt_mapping import rt_parameter_scale
+from .rt_mapping import rt_parameter_scale, RawTherapeeValue
 from utils.scale import value_as_percentage, scaled_value
 
 
@@ -23,7 +23,7 @@ class LightRoomValue:
         rt_scale = rt_parameter_scale(rt_map['key'], rt_map['section'])
         lr_scaled_value = value_as_percentage(self.value, self.scale)
         rt_scaled_value = scaled_value(lr_scaled_value, rt_scale)
-        return rt_scaled_value
+        return RawTherapeeValue(rt_map, rt_scaled_value, rt_scale)
 
 
 def lr_parameter_scale(parameter_name: str) -> Tuple[int, int]:
@@ -91,4 +91,32 @@ LR_PARAMETRIC_CURVE_PARAMETERS = [
     "ParametricShadowSplit",
     "ParametricMidtoneSplit",
     "ParametricHighlightSplit"
+]
+
+
+LR_HSL_ADJUSTMENT_PARAMETERS = [
+    "HueAdjustmentRed",
+    "HueAdjustmentOrange",
+    "HueAdjustmentYellow",
+    "HueAdjustmentGreen",
+    "HueAdjustmentAqua",
+    "HueAdjustmentBlue",
+    "HueAdjustmentPurple",
+    "HueAdjustmentMagenta",
+    "SaturationAdjustmentRed",
+    "SaturationAdjustmentOrange",
+    "SaturationAdjustmentYellow",
+    "SaturationAdjustmentGreen",
+    "SaturationAdjustmentAqua",
+    "SaturationAdjustmentBlue",
+    "SaturationAdjustmentPurple",
+    "SaturationAdjustmentMagenta",
+    "LuminanceAdjustmentRed",
+    "LuminanceAdjustmentOrange",
+    "LuminanceAdjustmentYellow",
+    "LuminanceAdjustmentGreen",
+    "LuminanceAdjustmentAqua",
+    "LuminanceAdjustmentBlue",
+    "LuminanceAdjustmentPurple",
+    "LuminanceAdjustmentMagenta",
 ]

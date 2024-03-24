@@ -44,16 +44,16 @@ def get_description(tree: ET) -> List[Dict[str, Any]]:
 
 def _report_non_supported_feature(key: str, value: str):
     message = f'[WARNING]: The current version of the converter does not support the feature {key}.'
-    message = message + f' As consequence, we are ignoring the attribute "{key}={value}" in the original template .xmp file'
+    message = message + f' As consequence, we are ignoring the attribute "{key}={value}" in the original preset .xmp file'
     print(message)
 
 
 
 def parse_xmp(path: str):
     xmp = read_xmp(path)
-    template_descriptions = get_description(xmp)
-    parsed_template = dict()
-    for description in template_descriptions:
+    preset_descriptions = get_description(xmp)
+    parsed_preset = dict()
+    for description in preset_descriptions:
         for key, value in description.items():
             key = key.replace('2012', '')
             if key in NOT_SUPPORTED_FEATURES:
@@ -73,9 +73,9 @@ def parse_xmp(path: str):
                 print(f"[WARNING]: Could not find the LightRoom scale for parameter {key}. Ignoring this parameter...")
                 continue
 
-            parsed_template[key] = LightRoomValue(key, parsed_value, scale)
+            parsed_preset[key] = LightRoomValue(key, parsed_value, scale)
 
-    return parsed_template
+    return parsed_preset
     
 
 

@@ -1,13 +1,24 @@
 '''Lookup tables with informations about RawTherapee parameters'''
-from typing import Tuple, Optional, Any
+from typing import Tuple, Optional, Any, Dict
 
+from utils.scale import scaled_value
 
 class RawTherapeeValue:
     '''Class to represent a value in RawTherapee'''
-    def __init__(self, name: str, value: Any, scale: Tuple[float, float]) -> None:
+    def __init__(self, name: Dict[Any, Any], value: Any, scale: Tuple[float, float]) -> None:
         self.name = name
         self.value = value
         self.scale = scale
+
+    def from_percentage(self, value: float) -> None:
+        if value < 0 or value > 1:
+            raise ValueError('[ERROR] Value is not in range 0 and 1.')
+    
+        self.value = scaled_value(value, self.scale)
+
+    def parameter_key(self) -> str:
+        return f"{self.name['section']}:{self.name['key']}"
+
 
 
 def rt_parameter_scale(name: str, section: Optional[str]) -> Tuple[float, float]:
