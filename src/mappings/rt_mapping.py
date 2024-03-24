@@ -47,7 +47,7 @@ RT_PARAMETERS_SCALE = {
     'White Balance:Green': (0.02, 10),
     'Dehaze:Strength': (0, 100),
     'Vibrance:Pastels': (-100, 100),
-    'ColorToning:LabRegionSaturation_1': (-100, 100),
+    'Exposure:Saturation': (-100, 100),
     'Exposure:Curve': (0,1),
     'Sharpening:Amount': (1, 1000),
     'Sharpening:Radius': (0.3, 3),

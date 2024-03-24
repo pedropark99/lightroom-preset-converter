@@ -79,4 +79,20 @@ def parse_xmp(path: str):
     return parsed_preset
     
 
+def get_tone_curves(tree: ET):
+    tone_curves = list()
+    tone_curves_tags = [
+        'ToneCurvePV2012',
+        'ToneCurvePV2012Red',
+        'ToneCurvePV2012Green',
+        'ToneCurvePV2012Blue'
+    ]
+    for tag in tone_curves_tags:
+        for curve in tree.iter(CRS_NAMESPACE + tag):
+            curve_tag = tag.replace('2012', '')
+            print(curve_tag)
 
+
+
+xmp = read_xmp(XMP_EXAMPLES[0])
+preset_curves = get_tone_curves(xmp)

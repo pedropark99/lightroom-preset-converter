@@ -13,7 +13,7 @@ LR_TO_RT_MAPPING = {
     "Clarity": {},
     "Dehaze": {'section': 'Dehaze', 'key': 'Strength'},
     "Vibrance": {'section': 'Vibrance', 'key': 'Pastels'},
-    "Saturation": {'section': 'ColorToning', 'key': 'LabRegionSaturation_1'},
+    "Saturation": {'section': 'Exposure', 'key': 'Saturation'},
     # When ParametricShadows, etc.. are setted they affect the parametric Curve at Exposure Section
     # In RT, the curve in Exposure section is defined by the "Curve" element in PP3 files.
     # Curve=2;0.25;0.5;0.75;33;18;-20;42;
