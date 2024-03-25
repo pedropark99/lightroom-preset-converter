@@ -1,5 +1,6 @@
 [Exposure]
 Contrast=0
+Saturation=-5
 Enabled=true
 Curve=2;0.24;0.45;0.77;0.0;14.999999999999986;-26.0;-41.0
 
@@ -16,10 +17,6 @@ Enabled=true
 
 [Vibrance]
 Pastels=0
-Enabled=true
-
-[ColorToning]
-LabRegionSaturation_1=-5
 Enabled=true
 
 [Sharpening]
@@ -41,3 +38,16 @@ VCurve=1;0;0.43;0.35;0.35;0.08333333333333333;0.5;0.35;0.35;0.16666666666666666;
 Enabled=true
 Setting=Custom
 Equal=0.95
+
+[ColorToning]
+Enabled=true
+Redlow=6
+Redmid=-6
+Redhigh=1
+Greenlow=6
+Greenmid=-6
+Greenhigh=1
+Bluelow=-3
+Bluemid=-7
+Bluehigh=1
+Method=Splitco

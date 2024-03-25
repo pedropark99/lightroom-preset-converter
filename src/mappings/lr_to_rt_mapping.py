@@ -55,6 +55,10 @@ LR_TO_RT_MAPPING = {
     "LuminanceAdjustmentBlue": {'section': 'HSV Equalizer', 'key': 'HCurve'},
     "LuminanceAdjustmentPurple": {'section': 'HSV Equalizer', 'key': 'HCurve'},
     "LuminanceAdjustmentMagenta": {'section': 'HSV Equalizer', 'key': 'HCurve'},
+    'ToneCurvePV': {},
+    'ToneCurvePVRed': {'section': 'ColorToning', 'key': 'Redlow'},
+    'ToneCurvePVGreen': {'section': 'ColorToning', 'key': 'Greenlow'},
+    'ToneCurvePVBlue': {'section': 'ColorToning', 'key': 'Bluelow'},
     "GrainAmount": {},
     "GrainSize": {},
     "GrainFrequency": {}

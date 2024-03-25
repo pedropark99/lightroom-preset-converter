@@ -53,7 +53,14 @@ def _report_non_supported_feature(key: str, value: str):
 def parse_xmp(path: str):
     xmp = read_xmp(path)
     preset_descriptions = get_description(xmp)
+    preset_curves = get_tone_curves(xmp)
+
     parsed_preset = dict()
+    for curve_key, points in preset_curves.items():
+        if curve_key in NOT_SUPPORTED_FEATURES:
+            continue
+        parsed_preset[curve_key] = points
+
     for description in preset_descriptions:
         for key, value in description.items():
             key = key.replace('2012', '')
@@ -79,8 +86,8 @@ def parse_xmp(path: str):
     return parsed_preset
     
 
-def get_tone_curves(tree: ET):
-    tone_curves = list()
+def get_tone_curves(tree: ET) -> Dict[str, Any]:
+    tone_curves = dict()
     tone_curves_tags = [
         'ToneCurvePV2012',
         'ToneCurvePV2012Red',
@@ -89,10 +96,18 @@ def get_tone_curves(tree: ET):
     ]
     for tag in tone_curves_tags:
         for curve in tree.iter(CRS_NAMESPACE + tag):
-            curve_tag = tag.replace('2012', '')
-            print(curve_tag)
+            curve_tag = curve.tag.replace(CRS_NAMESPACE, '')
+            curve_tag = curve_tag.replace('2012', '')
+            tone_curves[curve_tag] = list()
+            for point in curve.iter(RDF_NAMESPACE + 'li'):
+                x = str(point.text).split(',')[0].strip()
+                y = str(point.text).split(',')[1].strip()
+                x = float(x) / 255
+                y = float(y) / 255
+                tone_curves[curve_tag].append(
+                    LightRoomValue(curve_tag, {'x': x, 'y': y}, (0, 1))
+                )
+
+    return tone_curves
 
 
-
-xmp = read_xmp(XMP_EXAMPLES[0])
-preset_curves = get_tone_curves(xmp)

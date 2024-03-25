@@ -53,7 +53,16 @@ RT_PARAMETERS_SCALE = {
     'Sharpening:Radius': (0.3, 3),
     'Directional Pyramid Denoising:Luma': (0, 100),
     'Directional Pyramid Denoising:Ldetail': (0, 100),
-    'HSV Equalizer:HCurve': (0,1)
+    'HSV Equalizer:HCurve': (0,1),
+    'Redlow': (-100, 100),
+    'Greenlow': (-100, 100),
+    'Bluelow': (-100, 100),
+    'Redmed': (-100, 100),
+    'Greenmed': (-100, 100),
+    'Bluemed': (-100, 100),
+    'Redhigh': (-100, 100),
+    'Greenhigh': (-100, 100),
+    'Bluehigh': (-100, 100)
 }
 
 RT_PARAMETERS_DATA_TYPE = {
@@ -67,7 +76,7 @@ RT_PARAMETERS_DATA_TYPE = {
     'White Balance:Green': 'float',
     'Dehaze:Strength': 'int',
     'Vibrance:Pastels': 'int',
-    'ColorToning:LabRegionSaturation_1': 'int',
+    'Exposure:Saturation': 'int',
     'Exposure:Curve': 'float',
     'Sharpening:Amount': 'int',
     'Sharpening:Radius': 'float',

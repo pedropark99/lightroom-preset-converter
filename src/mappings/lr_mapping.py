@@ -102,6 +102,14 @@ LR_PARAMETRIC_CURVE_PARAMETERS = [
 ]
 
 
+LR_TONE_CURVES_PARAMETERS = [
+    'ToneCurvePV',
+    'ToneCurvePVRed',
+    'ToneCurvePVGreen',
+    'ToneCurvePVBlue'
+]
+
+
 LR_HSL_ADJUSTMENT_PARAMETERS = [
     "HueAdjustmentRed",
     "HueAdjustmentOrange",

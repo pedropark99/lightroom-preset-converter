@@ -9,7 +9,8 @@ from mappings.lr_to_rt_mapping import LR_TO_RT_PARAMETERS_FOR_DIRECT_CONVERSION
 from mappings.lr_mapping import (
     LightRoomValue,
     LR_PARAMETRIC_CURVE_PARAMETERS,
-    LR_HSL_ADJUSTMENT_PARAMETERS
+    LR_HSL_ADJUSTMENT_PARAMETERS,
+    LR_TONE_CURVES_PARAMETERS
 )
 
 
@@ -28,6 +29,7 @@ def convert_to_rt(path: str, print_result: bool = False):
     lr_to_rt = rt_convert_direct_parameters(lr_to_rt)
     lr_to_rt = rt_enable_used_sections(lr_to_rt)
     lr_to_rt = rt_parse_white_balance_values(lr_to_rt)
+    lr_to_rt = rt_convert_tone_curves(lr_to_rt)
     lr_to_rt = rt_convert_parametric_curve(lr_to_rt)
     lr_to_rt = rt_convert_hsv_curve(lr_to_rt)
     if print_result:
@@ -39,6 +41,8 @@ def convert_to_rt(path: str, print_result: bool = False):
 
 def rt_enable_used_sections(parameters: LRToRTParameters):
     for lr_key, lr_value in parameters.lr.items():
+        if lr_key.startswith('ToneCurve'):
+            continue
         rt_parameter = lr_value.corresponding_rt_parameter()
         rt_section = rt_parameter['section']
         rt_enabled_key = rt_section + ':Enabled'
@@ -284,6 +288,50 @@ def _hsv_color_name(key: str) -> str:
     if color_name == 'Aqua':
         color_name = 'Cyan'
     return color_name
+
+
+
+
+def rt_convert_tone_curves(parameters: LRToRTParameters):
+    for lr_parameter in LR_TONE_CURVES_PARAMETERS:
+        if lr_parameter in parameters.lr.keys():
+            lr_values = parameters.lr[lr_parameter]
+            for point in lr_values:
+                x = point.value['x']
+                delta_y = x - point.value['y']
+                rt_scaled_value = int(scaled_value(abs(delta_y), (0, 200)))
+                if delta_y < 0:
+                    rt_scaled_value = 0 - rt_scaled_value
+                else:
+                    rt_scaled_value = 0 + rt_scaled_value
+
+                rt_curve_name = _rt_tone_curve_name(lr_parameter, x)
+                rt_curve_key = 'ColorToning:' + rt_curve_name
+                parameters.rt[rt_curve_key] = RawTherapeeValue(rt_curve_key, rt_scaled_value, (-100, 100))
+
+        if 'ColorToning:Enabled' not in parameters.rt.keys():
+            parameters.rt['ColorToning:Enabled'] = 'true'
+
+    parameters.rt['ColorToning:Method'] = 'Splitco'
+    return parameters
+
+
+def _rt_tone_curve_name(lr_parameter, x):
+    color_name_regex = r'Red|Green|Blue'
+    color_name = re.search(color_name_regex, lr_parameter).group(0)
+    if x < 0.25:
+        region = 'low'
+    elif x > 0.25 and x < 0.75:
+        region = 'mid'
+    else:
+        region = 'high'
+    return color_name + region
+
+
+
+
+
+
 
 
 
